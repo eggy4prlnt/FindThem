@@ -1,2 +1,2 @@
-web: node build/server.js --ignore-ts-errors
-release: node build/ace migration:run --force --ignore-ts-errors
+release: ENV_SILENT=true node build/ace migration:run --force && node build/ace db:seed 
+web: npm run start:prod

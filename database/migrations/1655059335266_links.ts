@@ -8,7 +8,7 @@ export default class extends BaseSchema {
       table.increments('id')
       table.integer('user_id').unsigned().notNullable()
       table.string('judul', 50).notNullable()
-      table.string('url', 50).notNullable()
+      table.text('url').notNullable()
       table.string('kode', 50).notNullable()
 
       /**
