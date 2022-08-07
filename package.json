@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "node ace serve --watch",
-    "build": "node ace build --prod",
+    "build": "node ace build --prod --ignore-ts-errors",
     "start": "node ace serve --watch",
     "start:prod": "node ./build/server.js"
   },
