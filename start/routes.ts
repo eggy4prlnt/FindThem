@@ -31,12 +31,12 @@ Route.get('/link/korban/:id', 'WebsController.korban').middleware('auth');
 Route.get('/link/:kode', 'WebsController.redirect');
 Route.post('/link/:kode', 'WebsController.redirectPost');
 
-Route.get('/pengguna', 'PenggunasController.index').middleware('auth');
-Route.get('/pengguna/buat', 'PenggunasController.create').middleware('auth');
-Route.post('/pengguna/buat', 'PenggunasController.createUser').middleware('auth');
-Route.get('/pengguna/edit/:id', 'PenggunasController.edit').middleware('auth');
-Route.post('/pengguna/edit/:id', 'PenggunasController.editUser').middleware('auth');
-Route.get('/pengguna/delete/:id', 'PenggunasController.delete').middleware('auth');
+Route.get('/pengguna', 'PenggunasController.index').middleware(['auth', 'is_admin']);
+Route.get('/pengguna/buat', 'PenggunasController.create').middleware(['auth', 'is_admin']);
+Route.post('/pengguna/buat', 'PenggunasController.createUser').middleware(['auth', 'is_admin']);
+Route.get('/pengguna/edit/:id', 'PenggunasController.edit').middleware(['auth', 'is_admin']);
+Route.post('/pengguna/edit/:id', 'PenggunasController.editUser').middleware(['auth', 'is_admin']);
+Route.get('/pengguna/delete/:id', 'PenggunasController.delete').middleware(['auth', 'is_admin']);
 
 Route.get('/login', 'AuthController.login').middleware('guest');
 Route.post('/login', 'AuthController.loginPost').middleware('guest');

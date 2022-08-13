@@ -91,9 +91,11 @@
                 <a class="btn btn-warning" href="/link/edit/{{ link.id }}"
                   >Edit</a
                 >
+                @if(session.get('user').data.is_vip)
                 <a class="btn btn-danger" href="/link/delete/{{ link.id }}"
                   >Hapus</a
                 >
+                @endif
                 <a class="btn btn-accent" href="/link/korban/{{ link.id }}"
                   >Lihat Korban</a
                 >
