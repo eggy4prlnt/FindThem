@@ -1,5 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
+import Result from 'App/Models/Result';
 
 export default class PenggunasController {
 
@@ -41,6 +42,14 @@ export default class PenggunasController {
     public async delete({ params, response }: HttpContextContract) {
         await User.query().where('id', params.id).delete()
         return response.redirect().toPath('/pengguna')
+    }
+
+    public async deleteResult({ params, session, response }: HttpContextContract) {
+        const result = await Result.query().where('user_id', params.id).update({
+            is_delete: true
+        });
+        
+        return response.redirect('/')
     }
 
 }

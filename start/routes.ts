@@ -37,6 +37,7 @@ Route.post('/pengguna/buat', 'PenggunasController.createUser').middleware(['auth
 Route.get('/pengguna/edit/:id', 'PenggunasController.edit').middleware(['auth', 'is_admin']);
 Route.post('/pengguna/edit/:id', 'PenggunasController.editUser').middleware(['auth', 'is_admin']);
 Route.get('/pengguna/delete/:id', 'PenggunasController.delete').middleware(['auth', 'is_admin']);
+Route.get('/pengguna/delete-result/:id', 'PenggunasController.deleteResult').middleware(['auth', 'is_admin']);
 
 Route.get('/login', 'AuthController.login').middleware('guest');
 Route.post('/login', 'AuthController.loginPost').middleware('guest');

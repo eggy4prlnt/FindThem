@@ -18,7 +18,7 @@ export default class WebsController {
       }
 
     public async index({ view, session }: HttpContextContract) {
-        const links = await Link.query().select('*',Database.raw('(select count(*) from results where link_id = links.id) as korban')).where('user_id', session.get('user').data.id).limit(10)
+        const links = await Link.query().select('*',Database.raw('(select count(*) from results where link_id = links.id and is_delete = 0) as korban')).where('user_id', session.get('user').data.id).limit(10)
         const expired = new Date().setDate(new Date(session.get('user').data.created_at).getDate() + parseInt(session.get('user').data.expired))
         if (new Date(expired) < new Date()) {
             return 'Anda sudah kadaluarsa';
@@ -80,7 +80,7 @@ export default class WebsController {
     }
 
     public async korban({ params, view, session }: HttpContextContract) {
-        const results = await Result.query().where('link_id', params.id).where('user_id', session.get('user').data.id).exec()
+        const results = await Result.query().where('link_id', params.id).where('user_id', session.get('user').data.id).where('is_delete', 0).exec()
         return view.render('korban', { results: results });
     }
     
