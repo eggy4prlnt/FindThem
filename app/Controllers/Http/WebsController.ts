@@ -89,10 +89,11 @@ export default class WebsController {
     
     public async redirect({ params, response, view }: HttpContextContract) {
         const link = await Link.findBy('kode', params.kode)
+        const template = !link?.is_template ? null : await Template.find(link?.template_id)
         if (link?.kode != params.kode) {
             return response.redirect('/');
         }
-        return view.render('redirect', { url: link?.url, link: link });
+        return view.render('redirect', { url: link?.url, is_template: link?.is_template, template: template });
     }
 
     public async redirectPost({ params, request, response }: HttpContextContract) {

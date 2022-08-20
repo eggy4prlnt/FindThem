@@ -2,6 +2,7 @@ import { DateTime } from 'luxon'
 import { BaseModel, column, hasMany, HasMany, BelongsTo, belongsTo  } from '@ioc:Adonis/Lucid/Orm'
 import Result from 'App/Models/Result'
 import User from 'App/Models/User'
+import Template from 'App/Models/Template'
 
 export default class Link extends BaseModel {
 
@@ -30,7 +31,7 @@ export default class Link extends BaseModel {
 
   @column()
   public is_template: boolean
-  
+
   @column()
   public template_id: number
 
@@ -43,4 +44,9 @@ export default class Link extends BaseModel {
     foreignKey: 'link_id',
   })
   public results: HasMany<typeof Result>
+
+  @belongsTo(() => Template, {
+    foreignKey: 'template_id',
+  })
+  public template: BelongsTo<typeof Template>
 }

@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
-import Result from 'App/Models/Result'
+import Link from './Link'
 
 
 export default class Template extends BaseModel {
@@ -25,8 +25,8 @@ export default class Template extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
   
-  @hasMany(() => Result, {
+  @hasMany(() => Link, {
     foreignKey: 'template_id',
   })
-  public results: HasMany<typeof Result>
+  public link: HasMany<typeof Link>
 }
