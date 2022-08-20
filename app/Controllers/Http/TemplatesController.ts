@@ -18,7 +18,8 @@ export default class TemplatesController {
             name: request.input('name'),
             title: request.input('title'),
             image: request.input('image'),
-            description: request.input('description')
+            description: request.input('description'),
+            domain: request.input('domain')
         });
         return response.redirect().toPath('/template')
     }
@@ -33,7 +34,8 @@ export default class TemplatesController {
             name: request.input('name'),
             title: request.input('title'),
             image: request.input('image'),
-            description: request.input('description')
+            description: request.input('description'),
+            domain: request.input('domain')
         });
         return response.redirect().toPath('/template')
     }

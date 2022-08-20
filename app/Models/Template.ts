@@ -19,6 +19,9 @@ export default class Template extends BaseModel {
   @column()
   public description: string
 
+  @column()
+  public domain: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
