@@ -39,6 +39,13 @@ Route.post('/pengguna/edit/:id', 'PenggunasController.editUser').middleware(['au
 Route.get('/pengguna/delete/:id', 'PenggunasController.delete').middleware(['auth', 'is_admin']);
 Route.get('/pengguna/delete-result/:id', 'PenggunasController.deleteResult').middleware(['auth', 'is_admin']);
 
+Route.get('/template', 'TemplatesController.index').middleware(['auth', 'is_admin']);
+Route.get('/template/buat', 'TemplatesController.create').middleware(['auth', 'is_admin']);
+Route.post('/template/buat', 'TemplatesController.createTemplate').middleware(['auth', 'is_admin']);
+Route.get('/template/edit/:id', 'TemplatesController.edit').middleware(['auth', 'is_admin']);
+Route.post('/template/edit/:id', 'TemplatesController.editTemplate').middleware(['auth', 'is_admin']);
+Route.get('/template/delete/:id', 'TemplatesController.delete').middleware(['auth', 'is_admin']);
+
 Route.get('/login', 'AuthController.login').middleware('guest');
 Route.post('/login', 'AuthController.loginPost').middleware('guest');
 Route.get('/logout', 'AuthController.logout').middleware('auth');

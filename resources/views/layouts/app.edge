@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="cyberpunk">
+<html lang="en" data-theme="pastel">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -10,6 +10,12 @@
       rel="stylesheet"
       type="text/css"
     />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+      * {
+        font-family: 'Share Tech Mono', sans-serif;
+      }
+    </style>
   </head>
   <body>
     @if(session.has('user'))
@@ -43,6 +49,16 @@
         copyText.setSelectionRange(0, 99999);
         document.execCommand("copy");
         alert("Kode berhasil disalin!");
+      }
+      function istemplate() {
+        if ($('#is_template').is(':checked')) {
+          $('#template').removeClass('hidden');
+          $('#template').attr('required', true);
+        } else {
+          $('#template').addClass('hidden');
+          $('#template').prop('selectedIndex', 0);
+          $('#template').attr('required', false);
+        }
       }
     </script>
   </body>

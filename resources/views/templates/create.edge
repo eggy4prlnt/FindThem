@@ -1,0 +1,29 @@
+@layout('layouts.app') 
+@set('title', 'Dashboard') 
+@section('content')
+<div class="mt-5">
+  <div
+    class="card w-full bg-base-200 shadow-xl align-middle"
+  >
+    <div class="card-body">
+      <h2 class="card-title">Tambah Template!</h2>
+      <div class="overflow-x-auto ">
+        <form action="" method="post">
+            {{ csrfField() }}
+                <label for="">Nama Template</label>
+                <input type="text" class="input w-full" name="name" id="" required>
+                <label for="">Title</label>
+                <input type="text" class="input w-full" name="title" id="" required>
+                <label for="">Description</label>
+                <textarea name="description" id="" cols="50" rows="30" class="input w-full" required></textarea>
+                <label for="">Image</label>
+                <input type="text" class="input w-full" name="image" id="" required>
+                <button class="btn btn-primary w-96 mt-5" type="submit">Buat</button>
+                <a href="/" class="btn btn-error-focus w-96 mt-5">Kembali</a>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@end

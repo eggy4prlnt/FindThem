@@ -28,6 +28,12 @@ export default class Link extends BaseModel {
   @column()
   public user_id: number
 
+  @column()
+  public is_template: boolean
+  
+  @column()
+  public template_id: number
+
   @belongsTo(() => User, {
     foreignKey: 'user_id',
   })

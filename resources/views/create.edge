@@ -14,6 +14,18 @@
                 <input type="text" class="input w-full" name="judul" id="" required>
                 <label for="">Link</label>
                 <input type="url" class="input w-full" name="url" id="" required>
+                <div class="form-control">
+                  <label class="label cursor-pointer">
+                    <label for="">Ingin Menggunakan Template?</label>
+                    <input type="checkbox" id="is_template" name="is_template" class="checkbox" onchange="istemplate()" value="1" />
+                  </label>
+                </div>
+                <select name="template_id" id="template" class="input w-full hidden">
+                    <option selected value=''>Pilih Template</option>
+                    @each (templates in templates)
+                        <option value="{{ templates.id }}">{{ templates.name }}</option>
+                    @endeach
+                </select>
                 <button class="btn btn-primary w-96 mt-5" type="submit">Buat</button>
                 <a href="/" class="btn btn-error-focus w-96 mt-5">Kembali</a>
             </div>

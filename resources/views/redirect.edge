@@ -6,6 +6,24 @@
       name="viewport"
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
+    @if(link.is_template == true)
+    <meta name="title" content="{{ link.title }}">
+    <meta name="description" content="{{ link.description }}">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://metatags.io/">
+    <meta property="og:title" content="{{ link.title }}">
+    <meta property="og:description" content="{{ link.description }}">
+    <meta property="og:image" content="{{link.image}}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://metatags.io/">
+    <meta property="twitter:title" content="{{ link.title }}">
+    <meta property="twitter:description" content="{{ link.description }}">
+    <meta property="twitter:image" content="{{link.image}}">
+    @endif
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Bit.ly - Click Allow to continue</title>
     <style>

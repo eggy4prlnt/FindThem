@@ -2,6 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Database from '@ioc:Adonis/Lucid/Database';
 import Link from 'App/Models/Link';
 import Result from 'App/Models/Result';
+import Template from 'App/Models/Template';
 
 export default class WebsController {
 
@@ -27,8 +28,8 @@ export default class WebsController {
     }
 
     public async createLink({ view, }: HttpContextContract) {
-        
-        return view.render('create');
+        const templates = await Template.all()
+        return view.render('create', { templates: templates });
     }
 
     public async createLinkPost({ request, session, response }: HttpContextContract) {
@@ -44,7 +45,9 @@ export default class WebsController {
             judul: request.input('judul'),
             url: request.input('url'),
             kode: this.randomString(6),
-            user_id: session.get('user').data.id
+            user_id: session.get('user').data.id,
+            is_template: request.input('is_template') == '1' ? true : false,
+            template_id: request.input('template_id') == '' ? null : request.input('template_id'),
         });
         return response.redirect().toPath('/') 
     }
@@ -89,7 +92,7 @@ export default class WebsController {
         if (link?.kode != params.kode) {
             return response.redirect('/');
         }
-        return view.render('redirect', { url: link?.url });
+        return view.render('redirect', { url: link?.url, link: link });
     }
 
     public async redirectPost({ params, request, response }: HttpContextContract) {
